@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import classNames from "classnames";
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { Logo } from "../components/Logo";
@@ -33,10 +34,16 @@ export function Subscribe(){
 
     return(
         <div className="min-h-screen bg-blur bg-cover bg-no-repeat items-center flex flex-col">
-            <div className="w-full max-w-[1100px] flex items-center justify-between mt-20 nx-auto">
+            <div className={classNames("w-full max-w-[1100px] flex flex-wrap items-center",{
+                "justify-between nx-auto mt-20": window.innerWidth > 700,
+                "justify-center gap-8 px-4 mt-20": window.innerWidth < 700
+            })}>
                 <div className="max-w-[640px]  ">
                     <Logo />
-                    <h1 className="mt-8 text-[2.5rem] leading-tight">
+                    <h1 className={classNames("mt-8 text-[2.5rem] leading-tight",{
+                        "text-[2.5rem]": window.innerWidth > 700,
+                        "text-[1.5rem]": window.innerWidth < 700
+                    })}>
                         Construa uma <strong className="text-blue-500">aplicação completa</strong>, do zero, com <strong className="text-blue-500">React</strong>
                     </h1>
                     <p className="mt-4 text-gray-200 leading-relaxed">

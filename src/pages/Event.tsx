@@ -13,7 +13,7 @@ export function Event(){
                     ? <Video lessonSlug={slug}/> 
                     : <div className="flex-1"></div> 
                 }
-                <Sidebar />
+                <Sidebar isOpen={false} />
             </main>
         </div>
     );

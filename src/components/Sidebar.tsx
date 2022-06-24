@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import classNames from "classnames";
 import { Lesson } from "./Lesson";
 
 const GET_LESSONS_QUERY  = gql`
@@ -23,10 +24,18 @@ interface GetLessonsQueryResponse {
     }[]
 }
 
-export function Sidebar(){
+interface SideBarProps {
+    isOpen: boolean;
+}
+
+export function Sidebar(props: SideBarProps){
     const {data} = useQuery<GetLessonsQueryResponse>(GET_LESSONS_QUERY);
     return(
-        <aside className="w-[348px] bg-gray-700 p-6 border-l border-gray-600">
+        <aside className={classNames({
+            "w-[348px] bg-gray-700 p-6 border-l border-gray-600": !props.isOpen,
+            "absolute h-full top-0 right-0 z-50 w-[348px] bg-gray-700 p-6 border-l border-gray-600": window.innerWidth < 700 && props.isOpen,
+            "hidden":window.innerWidth < 700 && !props.isOpen
+        })}>
             <span className="font-bold text-2xl pb-6 mb-6 border-b border-gray-500 block">
                 Cronograma de aulas
             </span>
